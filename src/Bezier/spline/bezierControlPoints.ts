@@ -1,12 +1,13 @@
 import { intersection } from './intersection'
 import { distance } from './distance'
-import { cos, sin, asin, sqrt, pow } from '../../utils/Math'
+import { cos, sin } from '../../utils/Math'
 import { midpoint } from './midpoint'
 import { inferLine } from './inferLine'
 import { BezierVec2 } from './BezierVec2'
 import { BezierPoints } from './BezierPoints'
 import { BezierControlPointsProps, isControlPointsAngleParameters, isControlPointsMidpointParameters, isControlPointsVec2Parameters, isEndPointAngleParameters, isVec2 } from './BezierControlPoints.type'
 import { absoluteAngle } from './absoluteAngle'
+import { rotatePoint } from './rotatePoint'
 
 export const bezierControlPoints = (props: BezierControlPointsProps): BezierPoints[] => {
   const { start, points } = props
@@ -94,10 +95,16 @@ export const bezierControlPoints = (props: BezierControlPointsProps): BezierPoin
       const eca = -controls.eca
       const ecl = controls.ecl
 
-      startControl = { x: startAnchor.x + cos(eaa + sca) * scl, y: startAnchor.y + sin(eaa + sca) * scl }
-      const length = sqrt(pow(eal, 2) + pow(ecl, 2) - 2 * eal * ecl * cos(eca))
-      const theta = asin(sin(eca) / length * ecl)
-      endControl = isNaN(theta) ? endAnchor : { x: startAnchor.x + cos(theta + eaa) * length, y: startAnchor.y + sin(theta + eaa) * length }
+      // startControl = { x: startAnchor.x + cos(eaa + sca) * scl, y: startAnchor.y + sin(eaa + sca) * scl }
+      startControl = rotatePoint({ center: startAnchor, angle: eaa, point: { x: startAnchor.x + cos(sca) * scl, y: startAnchor.y + sin(sca) * scl } })
+      // const sc: BezierVec2 = rotatePoint({ center: startAnchor, angle: sca, point: { x: scl, y: 0 } })
+      // startControl = rotatePoint({ center: startAnchor, angle: eaa, point: sc })
+
+      // const length = sqrt(pow(eal, 2) + pow(ecl, 2) - 2 * eal * ecl * cos(eca))
+      // const theta = asin(sin(eca) / length * ecl)
+      // endControl = isNaN(theta) ? endAnchor : { x: endAnchor.x + cos(theta + eaa) * length, y: endAnchor.y + sin(theta + eaa) * length }
+      // endControl = { x: endAnchor.x - cos(eca - eaa) * ecl, y: endAnchor.y + sin(eca - eaa) * ecl }
+      endControl = rotatePoint({ center: startAnchor, angle: eaa, point: { x: endAnchor.x - cos(eca) * ecl, y: endAnchor.y + sin(eca) * ecl } })
       controlMidpoint = midpoint(startControl, endControl)
     }
 
