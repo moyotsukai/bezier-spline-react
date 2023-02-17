@@ -84,27 +84,19 @@ export const bezierControlPoints = (props: BezierControlPointsProps): BezierPoin
       }
     }
 
-    //TODO: ここが変
     if (isControlPointsAngleParameters(controls)) {
       const prev_startAnchor = pathsInfo.length === 0 ? startAnchor : pathsInfo[pathsInfo.length - 1].endAnchor
+      const prev_endControl = pathsInfo.length === 0 ? startAnchor : pathsInfo[pathsInfo.length - 1].endControl
       const prev_endAnchor = startAnchor
       const prev_eaa = absoluteAngle({ start: prev_startAnchor, end: prev_endAnchor })
-      const prev_eca = distance(prev_startAnchor, prev_endAnchor)
-      const sca = controls.sca === "smooth" ? -prev_eaa - eaa + prev_eca : -controls.sca
+      const prev_eca = 180 - (absoluteAngle({ start: prev_endAnchor, end: prev_endControl }) - prev_eaa)
+      const sca = controls.sca === "smooth" ? -(prev_eaa - eaa + prev_eca) : -controls.sca
       const scl = controls.scl
       const eca = -controls.eca
       const ecl = controls.ecl
 
-      // startControl = { x: startAnchor.x + cos(eaa + sca) * scl, y: startAnchor.y + sin(eaa + sca) * scl }
       startControl = rotatePoint({ center: startAnchor, angle: eaa, point: { x: startAnchor.x + cos(sca) * scl, y: startAnchor.y + sin(sca) * scl } })
-      // const sc: BezierVec2 = rotatePoint({ center: startAnchor, angle: sca, point: { x: scl, y: 0 } })
-      // startControl = rotatePoint({ center: startAnchor, angle: eaa, point: sc })
-
-      // const length = sqrt(pow(eal, 2) + pow(ecl, 2) - 2 * eal * ecl * cos(eca))
-      // const theta = asin(sin(eca) / length * ecl)
-      // endControl = isNaN(theta) ? endAnchor : { x: endAnchor.x + cos(theta + eaa) * length, y: endAnchor.y + sin(theta + eaa) * length }
-      // endControl = { x: endAnchor.x - cos(eca - eaa) * ecl, y: endAnchor.y + sin(eca - eaa) * ecl }
-      endControl = rotatePoint({ center: startAnchor, angle: eaa, point: { x: endAnchor.x - cos(eca) * ecl, y: endAnchor.y + sin(eca) * ecl } })
+      endControl = rotatePoint({ center: endAnchor, angle: eaa, point: { x: endAnchor.x - cos(eca) * ecl, y: endAnchor.y + sin(eca) * ecl } })
       controlMidpoint = midpoint(startControl, endControl)
     }
 
