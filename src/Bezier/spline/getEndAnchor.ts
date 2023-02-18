@@ -1,6 +1,6 @@
 import { BezierPoints } from "./BezierPoints"
-import { BezierVec2 } from "./BezierVec2"
+import { Vec2 } from "../vec2/Vec2"
 
-export const getEndAnchor = (paths: BezierPoints[]): BezierVec2 => {
+export const getEndAnchor = (paths: BezierPoints[]): Vec2 => {
   return paths[paths.length - 1].endAnchor
 }

@@ -1,6 +1,6 @@
-import { BezierVec2 } from './BezierVec2'
+import { Vec2 } from '../vec2/Vec2'
 
-export const isVec2 = (arg: any): arg is BezierVec2 => {
+export const isVec2 = (arg: any): arg is Vec2 => {
   if (!arg) { return false }
   return typeof arg.x === "number" && typeof arg.y === "number"
 }
@@ -60,8 +60,8 @@ export const isControlPointsAngleParameters = (arg: any): arg is ControlPointsAn
 //sc: start control point
 //ec: end control point
 type ControlPointsVec2Parameters = {
-  sc: BezierVec2,
-  ec: BezierVec2
+  sc: Vec2,
+  ec: Vec2
 }
 
 export const isControlPointsVec2Parameters = (arg: any): arg is ControlPointsVec2Parameters => {
@@ -75,9 +75,9 @@ export const isControlPointsVec2Parameters = (arg: any): arg is ControlPointsVec
 
 //start: start anchor point
 export type BezierControlPointsProps = {
-  start: BezierVec2,
+  start: Vec2,
   points: {
-    end: EndPointAngleParameters | BezierVec2,
+    end: EndPointAngleParameters | Vec2,
     controls: ControlPointsMidpointParameters | ControlPointsAngleParameters | ControlPointsVec2Parameters
   }[]
 }

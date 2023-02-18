@@ -1,9 +1,9 @@
-import { BezierVec2 } from "../../Bezier/spline/BezierVec2"
-import { rotatePoint } from "../../Bezier/spline/rotatePoint"
+import { Vec2 } from "../../Bezier/vec2/Vec2"
+import { rotatePoint } from "../../Bezier/vec2/rotatePoint"
 
 describe("Rotate point 1", () => {
-  const CENTER: BezierVec2 = { x: 10, y: 10 }
-  const TARGET: BezierVec2 = { x: 110, y: 110 }
+  const CENTER: Vec2 = { x: 10, y: 10 }
+  const TARGET: Vec2 = { x: 110, y: 110 }
 
   test("angle: 0", () => {
     expect(rotatePoint({ center: CENTER, angle: 0, point: TARGET }).x).toBeCloseTo(TARGET.x)
@@ -52,8 +52,8 @@ describe("Rotate point 1", () => {
 })
 
 describe("Rotate point 2", () => {
-  const CENTER: BezierVec2 = { x: 10, y: 10 }
-  const TARGET: BezierVec2 = { x: -90, y: 110 }
+  const CENTER: Vec2 = { x: 10, y: 10 }
+  const TARGET: Vec2 = { x: -90, y: 110 }
 
   test("angle: 15", () => {
     expect(rotatePoint({ center: CENTER, angle: 15, point: TARGET }).x).toBeCloseTo(CENTER.x - 122.474)
@@ -62,8 +62,8 @@ describe("Rotate point 2", () => {
 })
 
 describe("Rotate point 3", () => {
-  const CENTER: BezierVec2 = { x: 10, y: 10 }
-  const TARGET: BezierVec2 = { x: -90, y: -90 }
+  const CENTER: Vec2 = { x: 10, y: 10 }
+  const TARGET: Vec2 = { x: -90, y: -90 }
 
   test("angle: 15", () => {
     expect(rotatePoint({ center: CENTER, angle: 15, point: TARGET }).x).toBeCloseTo(CENTER.x - 70.710)
@@ -72,8 +72,8 @@ describe("Rotate point 3", () => {
 })
 
 describe("Rotate point 4", () => {
-  const CENTER: BezierVec2 = { x: 10, y: 10 }
-  const TARGET: BezierVec2 = { x: 110, y: -90 }
+  const CENTER: Vec2 = { x: 10, y: 10 }
+  const TARGET: Vec2 = { x: 110, y: -90 }
 
   test("angle: 15", () => {
     expect(rotatePoint({ center: CENTER, angle: 15, point: TARGET }).x).toBeCloseTo(CENTER.x + 122.474)

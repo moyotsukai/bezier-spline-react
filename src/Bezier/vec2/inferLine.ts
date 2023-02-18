@@ -1,16 +1,16 @@
 import { sin } from '../../utils/Math'
 import { cos } from '../../utils/Math'
-import { BezierVec2 } from './BezierVec2'
+import { Vec2 } from './Vec2'
 
 type Props = {
-  point: BezierVec2,
+  point: Vec2,
   angle: number
 }
 
-export const inferLine = (props: Props): [BezierVec2, BezierVec2] => {
+export const inferLine = (props: Props): [Vec2, Vec2] => {
   const { point, angle } = props
   const lineLength = 1000
-  const endPoint: BezierVec2 = {
+  const endPoint: Vec2 = {
     x: point.x + cos(angle) * lineLength,
     y: point.y - sin(angle) * lineLength
   }

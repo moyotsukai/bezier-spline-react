@@ -1,9 +1,9 @@
 import { atan } from "../../utils/Math"
-import { BezierVec2 } from "./BezierVec2"
+import { Vec2 } from "./Vec2"
 
 type Props = {
-  start: BezierVec2,
-  end: BezierVec2
+  start: Vec2,
+  end: Vec2
 }
 
 export const absoluteAngle = ({ start, end }: Props) => {

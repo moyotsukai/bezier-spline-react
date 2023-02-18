@@ -1,8 +1,8 @@
 import { abs } from '../../utils/Math'
-import { BezierVec2 } from './BezierVec2'
+import { Vec2 } from './Vec2'
 
 //2直線abとcdの交点
-export const intersection = (ab: [BezierVec2, BezierVec2], cd: [BezierVec2, BezierVec2]): BezierVec2 | null => {
+export const intersection = (ab: [Vec2, Vec2], cd: [Vec2, Vec2]): Vec2 | null => {
   const [a, b] = ab
   const [c, d] = cd
 

@@ -33,7 +33,7 @@ const Example: React.FC = () => {
   const splines: Bezier.Spline[] = [
     mountainPath.rotate({ center: { x: CENTER.x, y: CENTER.y }, angle: 15 }),
     valleyPath,
-  ].flat()
+  ]
 
   return (
     <Bezier.Svg splines={splines} />

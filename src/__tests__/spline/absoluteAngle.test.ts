@@ -1,4 +1,4 @@
-import { absoluteAngle } from "../../Bezier/spline/absoluteAngle"
+import { absoluteAngle } from "../../Bezier/vec2/absoluteAngle"
 
 describe("Absolute angle", () => {
   test("{0, 0}, {10, 10}", () => {

@@ -1,13 +1,13 @@
-import { intersection } from './intersection'
-import { distance } from './distance'
+import { intersection } from '../vec2/intersection'
+import { distance } from '../vec2/distance'
 import { cos, sin } from '../../utils/Math'
-import { midpoint } from './midpoint'
-import { inferLine } from './inferLine'
-import { BezierVec2 } from './BezierVec2'
+import { midpoint } from '../vec2/midpoint'
+import { inferLine } from '../vec2/inferLine'
+import { Vec2 } from '../vec2/Vec2'
 import { BezierPoints } from './BezierPoints'
 import { BezierControlPointsProps, isControlPointsAngleParameters, isControlPointsMidpointParameters, isControlPointsVec2Parameters, isEndPointAngleParameters, isVec2 } from './BezierControlPoints.type'
-import { absoluteAngle } from './absoluteAngle'
-import { rotatePoint } from './rotatePoint'
+import { absoluteAngle } from '../vec2/absoluteAngle'
+import { rotatePoint } from '../vec2/rotatePoint'
 
 export const bezierControlPoints = (props: BezierControlPointsProps): BezierPoints[] => {
   const { start, points } = props
@@ -18,10 +18,10 @@ export const bezierControlPoints = (props: BezierControlPointsProps): BezierPoin
     const { end, controls } = points[i]
 
     //Start point
-    const startAnchor: BezierVec2 = pathsInfo.length === 0 ? start : pathsInfo[pathsInfo.length - 1].endAnchor
+    const startAnchor: Vec2 = pathsInfo.length === 0 ? start : pathsInfo[pathsInfo.length - 1].endAnchor
 
     //End point
-    let endAnchor: BezierVec2 = { x: 0, y: 0 }
+    let endAnchor: Vec2 = { x: 0, y: 0 }
 
     if (isEndPointAngleParameters(end)) {
       const { eaa, eal } = end
@@ -36,7 +36,7 @@ export const bezierControlPoints = (props: BezierControlPointsProps): BezierPoin
     }
 
     //Anchor midpoint
-    const anchorMidpoint: BezierVec2 = midpoint(startAnchor, endAnchor)
+    const anchorMidpoint: Vec2 = midpoint(startAnchor, endAnchor)
 
     //Other parameters
     let eaa: number = 0
@@ -51,9 +51,9 @@ export const bezierControlPoints = (props: BezierControlPointsProps): BezierPoin
     }
 
     //Start control, End control, Control midpoint
-    let startControl: BezierVec2 = { x: 0, y: 0 }
-    let endControl: BezierVec2 = { x: 0, y: 0 }
-    let controlMidpoint: BezierVec2 = { x: 0, y: 0 }
+    let startControl: Vec2 = { x: 0, y: 0 }
+    let endControl: Vec2 = { x: 0, y: 0 }
+    let controlMidpoint: Vec2 = { x: 0, y: 0 }
 
     if (isControlPointsMidpointParameters(controls)) {
       const { cma, cml, cdr, cda } = controls
