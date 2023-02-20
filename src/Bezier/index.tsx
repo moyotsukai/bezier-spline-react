@@ -2,6 +2,7 @@ import { bezierControlPoints } from "./spline/bezierControlPoints"
 import { BezierControlPointsProps } from "./spline/BezierControlPoints.type"
 import { BezierPoints } from "./spline/BezierPoints"
 import { BezierSpline } from "./spline/BezierSpline"
+import { BezierStyleProps } from "./spline/BezierStyle"
 import { getEndAnchor as bezierGetEndAnchor } from "./spline/getEndAnchor"
 import { mirrorPath as bezierMirrorPath } from "./spline/mirrorPath"
 import { rotatePath as bezierRotatePath } from "./spline/rotatePath"
@@ -29,6 +30,8 @@ namespace Bezier {
 
   export type ControlPointsProps = BezierControlPointsProps
 
+  export type StyleProps = BezierStyleProps
+
 
   //Components
   export const Svg = SvgComponent
@@ -47,8 +50,8 @@ namespace Bezier {
 
   export const translatePath = bezierTranslatePath
 
-  export function spline(props: BezierControlPointsProps) {
-    return new BezierSpline(bezierControlPoints(props))
+  export function spline(props: ControlPointsProps, style?: StyleProps) {
+    return new BezierSpline(bezierControlPoints(props), { fill: style?.fill ?? null, stroke: style?.stroke ?? null })
   }
 
   export const absoluteAngle = bezierAbsoluteAngle

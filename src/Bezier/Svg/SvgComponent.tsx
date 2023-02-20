@@ -9,7 +9,7 @@ type Props = {
   splines: BezierSpline[]
 }
 
-const SvgComponent: React.FC<Props> = ({ splines }) => {
+const SvgComponent: React.FC<Props> = ({ splines }: Props) => {
   const showGuide = useShowGuideValue()
 
   return (
@@ -18,7 +18,13 @@ const SvgComponent: React.FC<Props> = ({ splines }) => {
         <g key={index}>
           {spline.paths.map((path, index) => (
             <React.Fragment key={index}>
-              <SvgCubicBezier path={path} />
+              <SvgCubicBezier
+                path={path}
+                style={{
+                  stroke: spline.stroke ?? null,
+                  fill: spline.fill ?? null
+                }}
+              />
               {showGuide &&
                 <SvgCubicBezierInfo pathInfo={path} />
               }

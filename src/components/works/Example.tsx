@@ -28,6 +28,9 @@ const Example: React.FC = () => {
         controls: { sca: "smooth", scl: 100 * SCALE, eca: 60, ecl: 100 * SCALE }
       }
     ]
+  }, {
+    stroke: "red",
+    // fill: "blue"
   })
 
   const splines: Bezier.Spline[] = [

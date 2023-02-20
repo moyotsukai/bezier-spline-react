@@ -1,21 +1,20 @@
 import React from 'react'
 import { BezierPoints } from '../spline/BezierPoints'
+import { BezierStyleProps } from '../spline/BezierStyle'
 
 type Props = {
   path: BezierPoints
-  stroke?: string
-  fill?: string
+  style: BezierStyleProps
 }
 
-const SvgCubicBezier: React.FC<Props> = (props) => {
-  const path = props.path
+const SvgCubicBezier: React.FC<Props> = ({ path, style }: Props) => {
   const d = `M ${path.startAnchor.x} ${path.startAnchor.y} C ${path.startControl.x} ${path.startControl.y}, ${path.endControl.x} ${path.endControl.y}, ${path.endAnchor.x} ${path.endAnchor.y}`
 
   return (
     <path
       d={d}
-      stroke={props.stroke ?? "black"}
-      fill={props.fill ?? "transparent"}
+      stroke={style.stroke ?? "black"}
+      fill={style.fill ?? "transparent"}
     />
   )
 }
