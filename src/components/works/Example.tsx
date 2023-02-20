@@ -1,8 +1,8 @@
 import React from 'react'
 import Bezier from '../../Bezier'
 
-const CENTER: Bezier.Vec2 = { x: 1000, y: 1000 }
-const SCALE = 2
+const CENTER: Bezier.Vec2 = { x: 100, y: 300 }
+const SCALE = 0.5
 
 const Example: React.FC = () => {
 
@@ -17,7 +17,7 @@ const Example: React.FC = () => {
   })
 
   const valleyPath = Bezier.spline({
-    start: { x: CENTER.x, y: CENTER.y + 800 },
+    start: { x: CENTER.x, y: CENTER.y + 100 },
     points: [
       {
         end: { eaa: 15, eal: 800 * SCALE },
@@ -30,7 +30,7 @@ const Example: React.FC = () => {
     ]
   }, {
     stroke: "red",
-    // fill: "blue"
+    fill: "rgba(0, 0, 0, 0.1)"
   })
 
   const splines: Bezier.Spline[] = [
@@ -39,7 +39,10 @@ const Example: React.FC = () => {
   ]
 
   return (
-    <Bezier.Svg splines={splines} />
+    <Bezier.Svg
+      splines={splines}
+      expandCanvasToEdge={true}
+    />
   )
 }
 

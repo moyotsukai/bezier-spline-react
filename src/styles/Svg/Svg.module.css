@@ -5,6 +5,10 @@
   outline-offset: -1px;
 }
 
+.svgCanvasExpand {
+  width: 100%;
+}
+
 .svgDownloadButton {
   padding: 10px 16px;
   border: none;

@@ -6,14 +6,15 @@ import SvgCubicBezier from "./SvgCubicBezier"
 import SvgCubicBezierInfo from "./SvgCubicBezierGuide"
 
 type Props = {
-  splines: BezierSpline[]
+  splines: BezierSpline[],
+  expandCanvasToEdge?: boolean
 }
 
-const SvgComponent: React.FC<Props> = ({ splines }: Props) => {
+const SvgComponent: React.FC<Props> = ({ splines, expandCanvasToEdge }: Props) => {
   const showGuide = useShowGuideValue()
 
   return (
-    <SvgCanvas>
+    <SvgCanvas expandCanvasToEdge={expandCanvasToEdge}>
       {splines.map((spline, index) => (
         <g key={index}>
           {spline.paths.map((path, index) => (
